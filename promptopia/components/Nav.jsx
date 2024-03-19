@@ -21,6 +21,7 @@ const Nav = () => {
   return (
     <nav className="flex-between w-full mb-16 pt-3">
 
+{/* Branding Top Left */}
     <Link href="/" className="flex gap-2 flex-center">
       <Image 
         src="/assets/images/logo.svg"
@@ -33,6 +34,7 @@ const Nav = () => {
     </Link>
 
     {/* Desktop Nav */}
+    {/* if session user is logged in (if true), then display create post/ sign out button/ clickable profile image  */}
     <div className="sm:flex hidden">
     {session?.user ? (
       <div className="flex gap-3 md:gap-5">
@@ -54,7 +56,8 @@ const Nav = () => {
           />
         </Link>
       </div>
-    ): (
+    ): (  
+      // Otherwise if session user is false -- display sign in button 
       <>
       {providers &&
         Object.values(providers).map((provider) => (
@@ -71,6 +74,7 @@ const Nav = () => {
     )}
     </div>
 {/* Mobile Nav */}
+{/* on smaller screen -- if user is logged in. When you click profile img you toggle the dropdown menu with buttons my profile, create post and sign out. */}
 <div className="sm:hidden flex relative">
 {session?.user ? (
   <div className="flex">
@@ -113,13 +117,14 @@ const Nav = () => {
     )}
   </div> 
 ): (
+  // if signed out display sign in button. 
   <>
-  {providers &&
+  {providers && //if providers exist and is true 
     Object.values(providers).map((provider) => (
       <button 
         type="button"
         key={provider.name}
-        onClick={() => signIn(provider.id)}
+        onClick={() => signIn(provider.id)} //uses google provider to login (choose account page)
         className="black_btn"
       >
         Sign In
