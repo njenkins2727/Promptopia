@@ -5,7 +5,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
     <section className='w-full max-w-full flex-start flex-col'>
     <h1 className='head_text text-left'>
-     <span className='blue_gradient'> {type} Post </span>
+     <span className='blue_gradient'> {type} Post </span> {/* type lets us change the title of the page if necessary */}
     </h1>  
     <p className='desc text-left max-w-md'> 
     {type} and share amazing prompts with the world, and let your imagination run wild with any AI-powered platform.
@@ -17,8 +17,8 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         <span className='font-satoshi font-semibold text-base text-gray-700'>Your AI Prompt</span>
     
         <textarea 
-        value={post.prompt} 
-        onChange={(e) => setPost({ ...post, prompt: e.target.value })} 
+        value={post.prompt} //this is targetted and updated by line below  
+        onChange={(e) => setPost({ ...post, prompt: e.target.value })} //updates the prompt value with user input (targets value)
         placeholder='Write your prompt here... '
         className='form_textarea'
         >
@@ -32,7 +32,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
     
         <input 
         value={post.tag} 
-        onChange={(e) => setPost({ ...post, tag: e.target.value })} 
+        onChange={(e) => setPost({ ...post, tag: e.target.value })} //updates the tag of the post with user input
         placeholder='#tag'
         required
         className='form_input'
@@ -46,10 +46,10 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   </Link>
   <button 
   type='submit' 
-  disabled={submitting}
-  className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'>
-    {submitting ? `${type}...` : type}
-  </button>
+  disabled={submitting} //if set submitting form is true, then disable the button
+  className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'> 
+     {submitting ? `${type}...` : type} {/* if still submitting is false then while it loads add '...' to 'Create' */}
+  </button> 
 </div>
 
     </form>

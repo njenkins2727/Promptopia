@@ -16,35 +16,35 @@ const CreatePrompt = () => {
     
     const createPrompt = async (e) => {
         e.preventDefault();
-        setSubmitting(true);
+        setSubmitting(true); //when form is active set submitting true, using as a loader
 
         try {
             const response = await fetch('/api/prompt/new', {
                 method: 'POST',
-                body: JSON.stringify({
-                    prompt: post.prompt,
-                    userId: session?.user.id,
-                    tag: post.tag
+                body: JSON.stringify({ //passing data through our front end to our api/prompt/new
+                    prompt: post.prompt, // the value of prompt that can be updated with setPost
+                    userId: session?.user.id, // '?' checks for the session 
+                    tag: post.tag // the value of tag that can be updated with setPost
                 })
             })
 
             if(response.ok){
-                router.push('/');
+                router.push('/'); // '/' directs back to homepage after handlesubmit is complete 
             }
         } catch (error) {
             console.log(error);
         }finally {
-            setSubmitting(false);
+            setSubmitting(false); //when form is finished set false
         }
     }
 
   return (
-    <Form
-    type="Create"
-    post={post}
+    <Form //passing props to the Form component
+    type="Create"  
+    post={post} 
     setPost={setPost}
-    submitting={submitting}
-    handleSubmit={createPrompt}
+    submitting={submitting} 
+    handleSubmit={createPrompt} 
     />
   )
 }
